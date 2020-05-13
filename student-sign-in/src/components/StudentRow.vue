@@ -21,7 +21,9 @@
                 this.$emit('student-present', student)
             },
             deleteStudent(student) {
-                this.$emit('delete-student', student)
+                if (confirm(`Delete ${student.name}, are you sure?`)) {
+                    this.$emit('delete-student', student)
+                }
             }
         }
     }
