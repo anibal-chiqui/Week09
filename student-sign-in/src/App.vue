@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <NewStudentForm v-on:student-added="newStudentAdded"></NewStudentForm>
+    <StudentTable></StudentTable>
+    <StudentMessage></StudentMessage>
   </div>
 </template>
 
@@ -16,17 +17,23 @@ export default {
     NewStudentForm,
     StudentMessage,
     StudentTable
+  },
+  data() {
+    return {
+      students: []
+    }
+  },
+  methods: {
+    newStudentAdded(student) {
+      this.students.push(student)
+      this.students.sort(function(s1, s2) {
+        return s1.name.toLowerCase() > s2.name.toLowerCase() ? -1 : 1
+      })
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
