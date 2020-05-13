@@ -4,6 +4,7 @@
     <StudentTable
             v-bind:students="students"
             v-on:student-present="studentArrivedOrLeft"
+            v-on:delete-student="studentDeleted"
     ></StudentTable>
     <StudentMessage
             v-bind:message="message"
@@ -41,6 +42,9 @@ export default {
     studentArrivedOrLeft(student) {
       this.message = student.present ? 'Welcome, ' : 'Goodbye, '
       this.name = student.name
+    },
+    studentDeleted(student) {
+      this.students = this.students.filter(s => s != student)
     }
   }
 }

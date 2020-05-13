@@ -20,8 +20,9 @@
                     <StudentRow
                             v-for="student in students" v-bind:key="student.name"
                             v-bind:student="student"
-                            v-bind:editTable="editTable"
-                            v-on:student-present="studentArrivedOrLeft">
+                            v-bind:edit="editTable"
+                            v-on:student-present="studentArrivedOrLeft"
+                            v-on:delete-student="studentDeleted">
                     </StudentRow>
                 </table>
             </div>
@@ -48,6 +49,9 @@
         methods: {
             studentArrivedOrLeft(student) {
                 this.$emit('student-present', student)
+            },
+            studentDeleted(student) {
+                this.$emit('delete-student', student)
             }
         }
     }
