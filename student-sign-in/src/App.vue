@@ -1,8 +1,14 @@
 <template>
   <div id="app">
     <NewStudentForm v-on:student-added="newStudentAdded"></NewStudentForm>
-    <StudentTable v-bind:students="students"></StudentTable>
-    <StudentMessage></StudentMessage>
+    <StudentTable
+            v-bind:students="students"
+            v-on:student-present="studentArrivedOrLeft"
+    ></StudentTable>
+    <StudentMessage
+            v-bind:message="message"
+            v-bind:name="name"
+    ></StudentMessage>
   </div>
 </template>
 
@@ -20,7 +26,9 @@ export default {
   },
   data() {
     return {
-      students: []
+      students: [],
+      message: '',
+      name: ''
     }
   },
   methods: {
@@ -29,6 +37,10 @@ export default {
       this.students.sort(function(s1, s2) {
         return s1.name.toLowerCase() < s2.name.toLowerCase() ? -1 : 1
       })
+    },
+    studentArrivedOrLeft(student) {
+      this.message = student.present ? 'Welcome, ' : 'Goodbye, '
+      this.name = student.name
     }
   }
 }

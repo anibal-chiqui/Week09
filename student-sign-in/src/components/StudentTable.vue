@@ -30,7 +30,7 @@
         },
         methods: {
             checked(student) {
-                // TODO emit message to parent
+                this.$emit('student-present', student)
             }
         }
     }
@@ -38,5 +38,12 @@
 </script>
 
 <style>
+    .present-true {
+        color: gray;
+        font-style: italic;
+    }
 
+    .present-false {
+        font-weight: bold;
+    }
 </style>
